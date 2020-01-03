@@ -1,0 +1,64 @@
+#!/usr/bin/with-contenv bash
+
+pwd1=`openssl rand -base64 18`
+pwd2=`openssl rand -base64 18`
+
+echo "================================="
+echo "Password Routine"
+echo "================================="
+
+if [ -z "$HL_USER_PASSWORD" ]; then
+    echo "\$HL_USER_PASSWORD not set in environment variable"
+    echo "will create a random HL user password"
+    pwd1=`openssl rand -base64 18`
+else
+    echo "\$HL_USER_PASSWORD is set in environment variable"
+    echo "will use given password from environment variable"
+    pwd1=$HL_USER_PASSWORD
+fi
+
+if [ -z "$HL_ROOT_PASSWORD" ]; then
+    echo "\$HL_ROOT_PASSWORD not set in environment variable"
+    echo "will create a random root password"
+    pwd2=`openssl rand -base64 18`
+else
+    echo "\$HL_ROOT_PASSWORD is set in environment variable"
+    echo "will use given root password from environment variable"
+    pwd2=$HL_ROOT_PASSWORD
+fi
+
+
+echo "================================="
+echo $HL_USER_USERNAME
+echo "================================="
+
+if [ -z "$HL_USER_USERNAME" ]; then
+   echo "\$HL_USER_USERNAME not set in environment variable"
+   echo "will use default username hacker"
+   export HL_USER_USERNAME=hacker
+   adduser -D -u 2000 $HL_USER_USERNAME
+   echo "$HL_USER_USERNAME:$pwd1" | chpasswd
+   echo "root:$pwd2" | chpasswd
+else
+   echo "\$HL_USER_USERNAME is set in environment variable"
+  if [ "$HL_USER_USERNAME" == "root" ]; then
+    echo "HL_USER_USERNAME=root"
+    echo 'root:$pwd2' | chpasswd
+  else
+    echo "\$HL_USER_USERNAME is set and not root"
+    adduser -D -u 2000 $HL_USER_USERNAME
+    echo "root:$pwd2" | chpasswd
+    echo "$HL_USER_USERNAME:$pwd1" | chpasswd
+  fi
+fi
+
+echo "
+-------------------------------------
+GID/UID
+-------------------------------------
+User uid:    $(id -u $HL_USER_USERNAME)
+User gid:    $(id -g $HL_USER_USERNAME)
+-------------------------------------
+"
+
+

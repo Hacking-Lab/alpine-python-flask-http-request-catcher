@@ -1,0 +1,15 @@
+version: '3.4'
+
+services:
+  alpine-python-flask:
+    image: hackinglab/alpine-python-flask:3.0.6
+    hostname: 'alpine-python-flask'
+    environment:
+      - "HL_USER_USERNAME=ttyoperator"
+      - "HL_USER_PASSWORD=compass"
+    env_file:
+      - ./UUID.env
+    volumes:
+      - ./UUID.gn:/goldnugget/UUID.gn
+    ports:
+      - 8000:80
