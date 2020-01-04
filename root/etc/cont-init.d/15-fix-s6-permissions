@@ -2,3 +2,5 @@
 
 chown root:root /run/s6/container_environment
 chmod 750 /run/s6/container_environment
+chown root:root /goldnugget
+chmod 700 /goldnugget
