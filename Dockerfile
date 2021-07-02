@@ -1,4 +1,4 @@
-FROM hackinglab/alpine-base:latest
+FROM hackinglab/alpine-base:3.2
 MAINTAINER Ivan Buetler <ivan.buetler@compass-security.com>
 
 # Add the files
