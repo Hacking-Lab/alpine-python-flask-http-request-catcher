@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv bash
+#!/command/bin/with-contenv bash
 
 pwd1=`openssl rand -base64 18`
 pwd2=`openssl rand -base64 18`

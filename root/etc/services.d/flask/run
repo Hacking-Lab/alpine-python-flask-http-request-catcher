@@ -1,4 +1,4 @@
-#!/usr/bin/with-contenv sh
+#!/command/with-contenv sh
 
 export FLASK_DEBUG=1
 export FLASK_APP=app.py
