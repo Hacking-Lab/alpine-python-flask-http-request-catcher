@@ -1,10 +1,7 @@
+
 services:
   alpine-python-flask-http-request-catcher:
-    image: hackinglab/alpine-python-flask-http-request-catcher:3.2
     build: .
-    hostname: 'alpine-python-flask'
-    environment:
-      - "HL_USER_USERNAME=ttyoperator"
-      - "HL_USER_PASSWORD=compass"
+    image: hackinglab/alpine-python-flask-http-request-catcher:3.2
     ports:
-      - 80:80
+      - 80:8080

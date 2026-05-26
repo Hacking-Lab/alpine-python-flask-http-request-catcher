@@ -1,0 +1,10 @@
+#!/command/execlineb -P
+# export env from /etc/cont-env and friends
+with-contenv
+
+# log to stdout
+fdmove -c 2 1
+
+# run bash script
+/bin/bash -e /etc/s6-overlay/scripts/fixurl.sh
+

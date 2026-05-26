@@ -1,23 +1,11 @@
-FROM hackinglab/alpine-base-hl:3.2
+FROM hackinglab/alpine-python-flask-hl:latest
 LABEL maintainer="Ivan Buetler <ivan.buetler@hacking-lab.com>"
 
 # Add the files
 ADD root /
 
-WORKDIR /app
+WORKDIR /opt/app
+RUN chown flask:flask /opt/app
 
-RUN adduser -D flask  && \
-    chown -R flask:flask /app && \
-    echo "**** install Python ****" && \
-    apk add --no-cache python3 py3-virtualenv py3-pip py3-flask && \
-    if [ ! -e /usr/bin/python ]; then ln -sf python3 /usr/bin/python ; fi && \
-    \
-    echo "**** install pip ****" && \
-    if [ ! -e /usr/bin/pip ]; then ln -s pip3 /usr/bin/pip ; fi && \
-    rm -rf /var/cache/apk/* && \
-    cd /app && \
-    pip3 install -r requirements.txt --break-system-packages
-
-
-# Expose the ports for nginx
-EXPOSE 80
+# Expose the ports for Flask app
+EXPOSE 8080
