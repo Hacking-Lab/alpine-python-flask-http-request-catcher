@@ -1,4 +1,4 @@
-# Alpine Python Flask
+# Alpine Python Flask HTTP Request Catcher
 ## Introduction
 This image is providing an http echo request service. It will store requests in a text file and load requests from there if the user clicks on /debug. Thus, one can observe multiple log entries. 
 
