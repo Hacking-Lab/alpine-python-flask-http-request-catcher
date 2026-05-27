@@ -15,7 +15,7 @@ Give cyber security specialists a `landing page` for collecting cookies in a xss
 This docker was created for the Hacking-Lab CTF framework. Thus, you will find the UUID files (dynamic flag deployment). Ignore them in your own setup
 
 ## Docker Hub
-https://hub.docker.com/repository/docker/hackinglab/alpine-python-flask-http-request-catcher/general
+https://hub.docker.com/repository/docker/hackinglab/alpine-python-flask-http-request-catcher
 
 ```bash
 services:
