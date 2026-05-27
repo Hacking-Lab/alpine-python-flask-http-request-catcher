@@ -2,6 +2,8 @@
 ## Introduction
 This image is providing an http echo request service. It will store requests in a text file and load requests from there if the user clicks on /debug. Thus, one can observe multiple log entries. 
 
+![Screenshot](./img/screenshot-request-catcher.png)
+
 ## Usage
 * xss landing page
 * api request monitoring
