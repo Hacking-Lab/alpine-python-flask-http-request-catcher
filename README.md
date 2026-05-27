@@ -4,6 +4,9 @@ This image is providing an http echo request service. It will store requests in 
 
 ![Screenshot](./img/screenshot-request-catcher.png)
 
+## Base Image
+https://github.com/Hacking-Lab/alpine-python-flask-hl
+
 ## Usage
 * xss landing page
 * api request monitoring
