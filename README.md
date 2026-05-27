@@ -10,9 +10,8 @@ This image is providing an http echo request service. It will store requests in 
 
 ## Purpose
 Give cyber security specialists a `landing page` for collecting cookies in a xss scenario. 
-
-## UUID
-This docker was created for the Hacking-Lab CTF framework. Thus, you will find the UUID files (dynamic flag deployment). Ignore them in your own setup
+- logging GET requests and QueryString
+- logging POST requests and POST body
 
 ## Docker Hub
 https://hub.docker.com/repository/docker/hackinglab/alpine-python-flask-http-request-catcher
