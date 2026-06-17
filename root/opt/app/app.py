@@ -1,8 +1,8 @@
-import html
 import datetime
+import html
 import os
 import codecs
-from flask import Flask, jsonify, request, redirect, render_template_string
+from flask import Flask, jsonify, request, render_template_string
 
 print()
 app = Flask(__name__)
@@ -452,19 +452,18 @@ def empty():
 @app.route('/clear', methods=['GET'])
 def clear():
     file_url = get_file()
-    try:
-        if os.path.isfile(file_url):
-            with codecs.open(file_url, 'r+', "utf-8") as the_file:
-                the_file.truncate(0)
-    finally:
-        timestamp = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
-        content = f"""
+    if os.path.isfile(file_url):
+        with codecs.open(file_url, 'r+', "utf-8") as the_file:
+            the_file.truncate(0)
+
+    timestamp = datetime.datetime.today().strftime("%Y-%m-%d %H:%M:%S")
+    content = f"""
 <section class="terminal">
   <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>clear-log</span></div>
   <div class="terminal-body"><span class="prompt">$</span> truncate {html.escape(file_url)}\n<span class="cyan">Log cleared:</span> {html.escape(timestamp)}\n\n<a class="button" href="/debug">▣ View empty capture buffer</a></div>
 </section>
 """
-        return page_template(content, active="clear")
+    return page_template(content, active="clear")
 
 
 @app.route('/debug', methods=['GET'])
@@ -507,8 +506,15 @@ def file_downloads():
 </section>
 """
         return page_template(content, active="debug")
-    except Exception:
-        return redirect('/')
+    except Exception as exc:
+        app.logger.exception("Failed to render request log")
+        content = f"""
+<section class="terminal">
+  <div class="terminal-head"><span class="dot"></span><span class="dot"></span><span class="dot"></span><span>debug-error</span></div>
+  <div class="log-empty">Unable to read captured requests: {html.escape(str(exc))}</div>
+</section>
+"""
+        return page_template(content, active="debug"), 500
 
 
 @app.route('/<path:any>', methods=['GET'])
@@ -521,5 +527,4 @@ if __name__ == "__main__":
     # Keep port 80 if you run as root or with the required capability.
     # For normal local testing, use port 5000 instead.
     app.run(host="0.0.0.0", port=80, debug=True)
-
 

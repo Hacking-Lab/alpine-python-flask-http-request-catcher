@@ -5,7 +5,15 @@ This image is providing an http echo request service. It will store requests in 
 ![Screenshot](./img/screenshot-request-catcher.png)
 
 ## Base Image
-https://github.com/Hacking-Lab/alpine-python-flask-hl
+This image is built on the Hacking Lab Alpine base image family:
+
+```text
+hackinglab/alpine-base-hl
+`-- hackinglab/alpine-python-flask-hl
+    `-- hackinglab/alpine-python-flask-http-request-catcher
+```
+
+Direct parent image: https://github.com/Hacking-Lab/alpine-python-flask-hl
 
 ## Usage
 * xss landing page
@@ -27,5 +35,3 @@ services:
     ports:
       - 80:8080
 ```
-
-
